@@ -1,5 +1,5 @@
 {
-    "name": "cookingblog",
+    "name": "CookingApp",
     "version": "1.0.0",
     "description": "",
     "main": "index.js",
@@ -8,8 +8,9 @@
     },
     "keywords": [],
     "author": "Seán Quill",
-    "license": "MIT",
+    "license": "",
     "dependencies": {
+        "cloudinary": "^1.35.0",
         "connect-flash": "^0.1.1",
         "cookie-parser": "^1.4.6",
         "dotenv": "^16.0.3",
@@ -19,6 +20,7 @@
         "express-fileupload": "^1.4.0",
         "express-session": "^1.17.3",
         "mongodb": "^5.1.0",
-        "mongoose": "^7.0.1"
+        "mongoose": "^7.0.1",
+        "multer": "^1.4.5-lts.1"
     }
 }

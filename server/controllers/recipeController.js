@@ -6,7 +6,7 @@ const Recipe = require("../models/Recipe")
 exports.homepage = async (req, res) => {
     try {
         const categoryNumber = 5
-        const randomNumber = 4
+        const randomNumber = 5
         const categories = await Category.aggregate([{ $sample: { size: categoryNumber } }])
         // const randomRecipe = await Recipe.find({}).sort({ _id: -1 }).limit(randomNumber) // sort decending instead of random
         const randomRecipe = await Recipe.aggregate([{ $sample: { size: randomNumber } }])
@@ -50,6 +50,32 @@ exports.exploreRecipe = async (req, res) => {
         res.render("recipe", { title: "Recipe", recipe: recipe, recipeUrl })
     } catch (error) {
         res.status(500).send({ message: error.message || "Error Occurred" })
+    }
+}
+
+// GET /explore-latest
+exports.exploreLatest = async (req, res) => {
+    try {
+        const limitNumber = 15
+        const recipe = await Recipe.find({}).sort({ _id: -1 }).limit(limitNumber)
+        res.render("explore-latest", { title: "Explore the Latest Recipe's", recipe })
+    } catch (error) {
+        res.status(500).send({ message: error.message || "Error Occured" })
+    }
+}
+
+// GET /explore-random
+exports.exploreRandom = async (req, res) => {
+    try {
+        // const limitNumber = 15
+        // const recipeLong = Recipe.aggregate([{ $sample: { size: limitNumber } }])
+        // const recipe = { recipeLong }
+        let count = await Recipe.find().countDocuments()
+        let random = Math.floor(Math.random() * count)
+        let recipe = await Recipe.findOne().skip(random).exec()
+        res.render("random-recipe", { title: "Explore A Random Recipe", recipe })
+    } catch (error) {
+        res.status(500).send({ message: error.message || "Error Occured" })
     }
 }
 

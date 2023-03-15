@@ -43,13 +43,25 @@ const recipeSchema = new mongoose.Schema({
     },
     category: {
         type: String,
-        enum: ["Thai", "American", "Chinese", "Mexican", "Indian", "Spanish"],
+        enum: ["Thai", "American", "Chinese", "Mexican", "Indian"],
         required: "This field is required.",
     },
     image: {
         type: String,
         required: "This field is required.",
     },
+    url: {
+        type: String,
+        required: "This field is required.",
+    },
+    linkage: {
+        type: String,
+        required: "This field is required.",
+    },
 })
+
+recipeSchema.index({ name: "text", description: "text" })
+// WildCard Indexing
+//recipeSchema.index({ "$**" : 'text' });
 
 module.exports = mongoose.model("Recipe", recipeSchema)

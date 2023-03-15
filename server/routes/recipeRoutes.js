@@ -4,7 +4,8 @@ const recipeController = require("../controllers/recipeController")
 
 // App Routes
 router.get("/", recipeController.homepage)
-router.get("/categories", recipeController.exploreCategories)
 router.get("/recipe/:url", recipeController.exploreRecipe)
+router.get("/categories", recipeController.exploreCategories)
+router.get("/categories/:url", recipeController.exploreCategoriesById)
 
 module.exports = router

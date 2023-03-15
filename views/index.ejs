@@ -18,7 +18,7 @@
 <section class="row row-cols-2 row-cols-lg-6 g-2 g-lg-3 py-4">
     <% if (categories != "") {%> 
         <% categories.forEach(function(category, index) {%>
-            <a href="/categories/<%-category.name.toLowerCase()%>" class="col text-center category__link">
+            <a href="/categories/<%-category.name%>" class="col text-center category__link">
                 <div class="category__img shadow">
                     <img src="<%-category.image%>" alt="<%-category.name%>" loading="lazy" />
                 </div>
@@ -35,7 +35,7 @@
 </section>
 <!-- Categories End -->
 
-<!-- Latest Start -->
+<!-- Random Start -->
 <section class="pb-4 pt-4">
     <div class="d-flex mb-2 align-items-center">
         <h2>Random Recipes</h2>
@@ -53,27 +53,9 @@
                 </a>
             <% }) %>
         <% } %>
-        <!-- <a href="/recipe/#" class="col text-center category__link">
-            <div class="category__img category__img--Large shadow">
-                <img src="img/chocolate-banoffe-whoopie-pies.jpg" alt="Chocolate Banoffe" loading="lazy" />
-            </div>
-            <div class="pt-1">Chocolate Banoffe</div>
-        </a>
-        <a href="/recipe/#" class="col text-center category__link">
-            <div class="category__img category__img--Large shadow">
-                <img src="img/chocolate-banoffe-whoopie-pies.jpg" alt="Chocolate Banoffe" loading="lazy" />
-            </div>
-            <div class="pt-1">Chocolate Banoffe</div>
-        </a>
-        <a href="/recipe/#" class="col text-center category__link">
-            <div class="category__img category__img--Large shadow">
-                <img src="img/chocolate-banoffe-whoopie-pies.jpg" alt="Chocolate Banoffe" loading="lazy" />
-            </div>
-            <div class="pt-1">Chocolate Banoffe</div>
-        </a> -->
     </div>
 </section>
-<!-- Latest End -->
+<!-- Random End -->
 
 <!-- Submit Start -->
 

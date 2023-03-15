@@ -10,7 +10,6 @@ exports.homepage = async (req, res) => {
         const categories = await Category.aggregate([{ $sample: { size: categoryNumber } }])
         // const randomRecipe = await Recipe.find({}).sort({ _id: -1 }).limit(randomNumber) // sort decending instead of random
         const randomRecipe = await Recipe.aggregate([{ $sample: { size: randomNumber } }])
-
         const food = { randomRecipe }
         res.render("index", { title: "Homepage", categories: categories, food: food })
     } catch (error) {
@@ -23,9 +22,24 @@ exports.exploreCategories = async (req, res) => {
     try {
         const limitNumber = 20
         const categories = await Category.find({}).limit(limitNumber)
-        res.render("categories", { title: "Categories", categories: categories })
+        const food = ""
+        res.render("categories", { title: "Categories", categories: categories, food: food })
     } catch (error) {
         res.status(500).send({ message: error.message || "Error Occured" })
+    }
+}
+
+// GET /categories/:id
+exports.exploreCategoriesById = async (req, res) => {
+    try {
+        let categoryId = req.params.url
+        const limitNumber = 20
+        const categoryById = await Recipe.find({ category: categoryId }).limit(limitNumber)
+        const food = { categoryById }
+        console.log(food)
+        res.render("categories", { title: "Cooking Blog - Categoreis", food: food, categoryId: categoryId })
+    } catch (error) {
+        res.satus(500).send({ message: error.message || "Error Occured" })
     }
 }
 

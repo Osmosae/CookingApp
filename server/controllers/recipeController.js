@@ -49,46 +49,18 @@ exports.exploreRecipe = async (req, res) => {
         const recipe = await Recipe.findOne({ url: recipeUrl })
         res.render("recipe", { title: "Recipe", recipe: recipe, recipeUrl })
     } catch (error) {
-        res.status(500).send({ message: error.message || "Error Occured" })
+        res.status(500).send({ message: error.message || "Error Occurred" })
     }
 }
 
-// // Manual insertion to database
-// async function insertDummyCategoryData() {
-//     try {
-//         await Category.insertMany([
-//             {
-//                 name: "American",
-//                 image: "https://res.cloudinary.com/dnkjraw2p/image/upload/v1678804994/categories/american-food_aole66.jpg",
-//                 cloudinaryId: "american-food_aole66",
-//             },
-//             {
-//                 name: "Chinese",
-//                 image: "https://res.cloudinary.com/dnkjraw2p/image/upload/v1678804994/categories/chinese-food_goiq3q.jpg",
-//                 cloudinaryId: "chinese-food_goiq3q",
-//             },
-//             {
-//                 name: "Indian",
-//                 image: "https://res.cloudinary.com/dnkjraw2p/image/upload/v1678804994/categories/indian-food_fodncq.jpg",
-//                 cloudinaryId: "indian-food_fodncq",
-//             },
-//             {
-//                 name: "Mexican",
-//                 image: "https://res.cloudinary.com/dnkjraw2p/image/upload/v1678804994/categories/mexican-food_pxnddf.jpg",
-//                 cloudinaryId: "mexican-food_pxnddf",
-//             },
-//             {
-//                 name: "Spanish",
-//                 image: "https://res.cloudinary.com/dnkjraw2p/image/upload/v1678804994/categories/spanish-food_c0z7y8.jpg",
-//                 cloudinaryId: "spanish-food_c0z7y8",
-//             },
-//             {
-//                 name: "Thai",
-//                 image: "https://res.cloudinary.com/dnkjraw2p/image/upload/v1678804994/categories/thai-food_t60zmr.jpg",
-//                 cloudinaryId: "thai-food_t60zmr",
-//             },
-//         ])
-//     } catch (error) {
-//         console.log("err", +error)
-//     }
-// }
+//  POST /search
+exports.searchRecipe = async (req, res) => {
+    try {
+        let userSearch = req.body.search
+        let recipe = await Recipe.find({ $text: { $search: userSearch, $diacriticSensitive: true } })
+        // res.json(recipe)
+        res.render("search", { title: "Search", recipe, userSearch })
+    } catch (error) {
+        res.status(500).send({ message: error.message || "Error Occurred" })
+    }
+}

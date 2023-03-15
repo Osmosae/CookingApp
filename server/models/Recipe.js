@@ -60,7 +60,7 @@ const recipeSchema = new mongoose.Schema({
     },
 })
 
-recipeSchema.index({ name: "text", description: "text" })
+recipeSchema.index({ name: "text", category: "text" })
 // WildCard Indexing
 //recipeSchema.index({ "$**" : 'text' });
 

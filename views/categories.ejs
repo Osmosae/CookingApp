@@ -30,7 +30,7 @@
 
 <% if (food != "") { %>
     <% if (food.categoryById.length > 0) { %>
-        <div class="row row-cols-2 row-cols-lg-4 g-2 g-lg-3">
+        <div class="row row-cols-2 row-cols-lg-5 g-2 g-lg-3">
             <% food.categoryById.forEach(function(recipe, index){ %>
                 <a href="/recipe/<%= recipe.url%>" class="col text-center category__link">
                     <div class="category__img category__img--Large shadow">
@@ -41,8 +41,8 @@
             <% }) %>
         </div>
     <% } else { %>
-        <div class="row">
-            <p>Sorry no recipes in this category yet. Maybe you should add some</p>
+        <div class="row py-4">
+            <h2>Sorry no recipes in this category yet. Maybe you should add some</h2>
         </div>
     <% } %>
 <% } %>

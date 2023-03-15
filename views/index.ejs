@@ -45,7 +45,7 @@
     <div class="row row-cols-2 row-cols-lg-4 g-2 g-lg-3">
         <% if (food!="") { %>
             <% food.randomRecipe.forEach(function(recipe, index){ %>
-                <a href="/recipe/<%= recipe._id %>" class="col text-center category__link">
+                <a href="/recipe/<%= recipe.url %>" class="col text-center category__link">
                     <div class="category__img category__img--Large shadow">
                         <img src="img/recipes/<%= recipe.image %>" alt="<%= recipe.name %>" loading="lazy" />
                     </div>

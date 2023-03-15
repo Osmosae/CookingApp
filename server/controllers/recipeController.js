@@ -32,9 +32,9 @@ exports.exploreCategories = async (req, res) => {
 // GET /recipe/:id
 exports.exploreRecipe = async (req, res) => {
     try {
-        let recipeId = req.params.id
-        const recipe = await Recipe.findById(recipeId)
-        res.render("recipe", { title: "Recipe", recipe: recipe })
+        let recipeUrl = req.params.url
+        const recipe = await Recipe.findOne({ url: recipeUrl })
+        res.render("recipe", { title: "Recipe", recipe: recipe, recipeUrl })
     } catch (error) {
         res.status(500).send({ message: error.message || "Error Occured" })
     }

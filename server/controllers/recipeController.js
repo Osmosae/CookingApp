@@ -11,24 +11,22 @@ exports.homepage = async (req, res) => {
         // const randomRecipe = await Recipe.find({}).sort({ _id: -1 }).limit(randomNumber) // sort decending instead of random
         const randomRecipe = await Recipe.aggregate([{ $sample: { size: randomNumber } }])
         const food = { randomRecipe }
-        res.render("index", { title: "Homepage", categories: categories, food: food })
+        res.render("index", { title: "Homepage", categories, food })
     } catch (error) {
         res.status(500).send({ message: error.message || "Error Occured" })
     }
 }
-
 // GET /categories
 exports.exploreCategories = async (req, res) => {
     try {
         const limitNumber = 20
         const categories = await Category.find({}).limit(limitNumber)
         const food = ""
-        res.render("categories", { title: "Categories", categories: categories, food: food })
+        res.render("categories", { title: "Categories", categories, food })
     } catch (error) {
         res.status(500).send({ message: error.message || "Error Occured" })
     }
 }
-
 // GET /categories/:id
 exports.exploreCategoriesById = async (req, res) => {
     try {
@@ -36,23 +34,21 @@ exports.exploreCategoriesById = async (req, res) => {
         const limitNumber = 20
         const categoryById = await Recipe.find({ category: categoryId }).limit(limitNumber)
         const food = { categoryById }
-        res.render("categories", { title: "Cooking Blog - Categoreis", food: food, categoryId: categoryId })
+        res.render("categories", { title: "Cooking Blog - Categoreis", food, categoryId })
     } catch (error) {
         res.satus(500).send({ message: error.message || "Error Occured" })
     }
 }
-
 // GET /recipe/:id
 exports.exploreRecipe = async (req, res) => {
     try {
         let recipeUrl = req.params.url
         const recipe = await Recipe.findOne({ url: recipeUrl })
-        res.render("recipe", { title: "Recipe", recipe: recipe, recipeUrl })
+        res.render("recipe", { title: "Recipe", recipe, recipeUrl })
     } catch (error) {
         res.status(500).send({ message: error.message || "Error Occurred" })
     }
 }
-
 // GET /explore-latest
 exports.exploreLatest = async (req, res) => {
     try {
@@ -63,13 +59,21 @@ exports.exploreLatest = async (req, res) => {
         res.status(500).send({ message: error.message || "Error Occured" })
     }
 }
-
 // GET /explore-random
 exports.exploreRandom = async (req, res) => {
     try {
-        // const limitNumber = 15
-        // const recipeLong = Recipe.aggregate([{ $sample: { size: limitNumber } }])
-        // const recipe = { recipeLong }
+        const randomNumber = 15
+        const randomRecipe = await Recipe.aggregate([{ $sample: { size: randomNumber } }])
+        const food = { randomRecipe }
+        // res.json(food)
+        res.render("explore-random", { title: "Explore the Latest Recipe's", food })
+    } catch (error) {
+        res.status(500).send({ message: error.message || "Error Occured" })
+    }
+}
+// GET /random-recipe
+exports.randomRecipe = async (req, res) => {
+    try {
         let count = await Recipe.find().countDocuments()
         let random = Math.floor(Math.random() * count)
         let recipe = await Recipe.findOne().skip(random).exec()

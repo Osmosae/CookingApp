@@ -6,7 +6,7 @@ const Recipe = require("../models/Recipe")
 exports.homepage = async (req, res) => {
     try {
         const categoryNumber = 5
-        const randomNumber = 5
+        const randomNumber = 6
         const categories = await Category.aggregate([{ $sample: { size: categoryNumber } }])
         // const randomRecipe = await Recipe.find({}).sort({ _id: -1 }).limit(randomNumber) // sort decending instead of random
         const randomRecipe = await Recipe.aggregate([{ $sample: { size: randomNumber } }])

@@ -6,7 +6,7 @@
             <li class="breadcrumb-item"><a href="/">Home</a></li>
             <% if (food != "") { %>
                 <li class="breadcrumb-item"><a href="/categories">Categories</a></li>
-                <li class="breadcrumb-item"aria-current="/categories/<%=categoryId%>"><%=categoryId%></li>
+                <li class="breadcrumb-item"aria-current="/categories/<%=categoryUrl%>"><%=categoryUrl%></li>
             <% } else if (food ==="") { %>
                 <li class="breadcrumb-item active" aria-current="/categories">Categories</li>
             <% } %>
@@ -29,9 +29,9 @@
 
 
 <% if (food != "") { %>
-    <% if (food.categoryById.length > 0) { %>
+    <% if (food.categoryByUrl.length > 0) { %>
         <div class="row row-cols-2 row-cols-lg-5 g-2 g-lg-3">
-            <% food.categoryById.forEach(function(recipe, index){ %>
+            <% food.categoryByUrl.forEach(function(recipe, index){ %>
                 <a href="/recipe/<%= recipe.url%>" class="col text-center category__link">
                     <div class="category__img category__img--Large shadow">
                         <img src="/img/recipes/<%= recipe.image %>" alt="<%= recipe.name %>" loading="lazy" />

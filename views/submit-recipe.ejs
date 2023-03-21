@@ -1,0 +1,128 @@
+<div class="px-4 py-5 my-5 text-center">
+    <h1 class="display-5 fw-bold">Submit Your Recipe</h1>
+    <div class="col-lg-6 mx-auto">
+        <p class="lead">Lorem ipsum dolor sit amet consectetur adipisicing elit. Maiores quaerat dignissimos fugit rem ipsa aliquid.</p>
+    </div>
+</div>
+
+<div class="row justify-content-center">
+    <% if(infoSubmitObj != "") { %>
+        <div class="col-8 alert alert-success" role="alert">
+            <%= infoSubmitObj %>
+        </div>
+    <% } %> 
+    <% if(infoErrorsObj != "") { %>
+        <div class="col-8 alert alert-danger" role="alert">
+            <%= infoErrorsObj %>
+        </div>
+    <% } %>         
+    <div class="col-8 container">
+        <form action="/submit-recipe" enctype="multipart/form-data" method="post" class="submitForm needs-validation" novalidate="">
+            <div class="row g-3">
+                <div class="col-9 inputBox">
+                    <input type="text" name="name" id="validationCustom01" class="form-control" required>
+                    <span>Recipe Name</span>                         
+                </div>
+                <div class="col-3 inputBox">
+                    <input type="number" name="servings" id="servings" class="form-control" required>
+                    <span>Servings</span>
+                </div>
+                <div class="col-4 inputBox">
+                    <input type="number" name="servings" id="servings" class="form-control" required>
+                    <span>Total Time</span>
+                </div>
+                <div class="col-4 inputBox">
+                    <input type="number" name="servings" id="servings" class="form-control" required>
+                    <span>Prep Time</span>
+                </div>
+                <div class="col-4 inputBox">
+                    <input type="number" name="servings" id="servings" class="form-control" required>
+                    <span>Cook Time</span>
+                </div>
+                <div class="col-12">
+                    <label for="ingredients" class="form-label">Ingredients:</label>
+                    <div class="ingredientList">
+                        <div class="ingredientDiv mb-1 row g-1">
+                            <div class="col-2 ingredientInputBox">
+                                <input type="number" name="ingredients" class="form-control" required>
+                            </div>
+                            <div class="col-2 ingredientInputBox">
+                                <input class="form-control" list="unitOptions" id="unitList" placeholder="unit...">
+                                <datalist id="unitOptions">
+                                    <option value="Grams">
+                                    <option value="Kilograms">
+                                    <option value="Tonnes">
+                                    <option value="Pounds (UK)">
+                                    <option value="Pounds (US)">
+                                    <option value="Ounces (UK)">
+                                    <option value="Ounces (US)">
+                                    <option value="Pieces">
+                                    <option value="Cubes">
+                                    <option value="Bits">
+                                    <option value="Splash">
+                                    <option value="Dollop">
+                                    <option value="Shake">
+                                    <option value="Sprinkle">
+                                </datalist>
+                            </div>
+                            <div class="col-4 ingredientInputBox">
+                                <!-- <label for="exampleDataList" class="form-label">Datalist example</label> -->
+                                <input class="form-control" list="ingredientOptions" id="ingredientList" placeholder="ingredient...">
+                                <datalist id="ingredientOptions">
+                                    <option value="Chicken">
+                                    <option value="Beef">
+                                    <option value="Lamb">
+                                    <option value="Pork">
+                                    <option value="Vegetable">
+                                    <option value="Feesh">
+                                </datalist>
+                            </div>
+                            <div class="col-4 ingredientInputBox">
+                                <input type="text" name="ingredients" class="form-control" placeholder="Notes">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-12 ingredientBtns">
+                    <button type="button" class="btn btn-success" id="addIngredientBtn"><i class="bi bi-plus-circle-fill"></i></button>
+                    <button type="button" class="btn btn-danger" id="removeIngredientBtn"><i class="bi bi-x-circle-fill"></i></button>
+                </div>
+                <div class="col-12">
+                    <label for="directions" class="form-label">Directions:</label>
+                    <div class="col-12">
+                        <div class="directionList">
+                            <div class="directionDiv mb-1">
+                                <div class="col-12 form-floating">
+                                    <textarea name="directions" id="direction" class="form-control" cols="30" rows="4"></textarea>
+                                    <label for="direction">Step 1</label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-12 directionBtns">
+                    <button type="button" class="btn btn-success" id="addDirectionBtn"><i class="bi bi-plus-circle-fill"></i></button>
+                    <button type="button" class="btn btn-danger" id="removeDirectionBtn"><i class="bi bi-x-circle-fill"></i></button>
+                </div>
+                <div class="col-12">
+                    <label for="category">Select Category</label>
+                    <select name="category" id="" class="form-select form-control" aria-label="Category">
+                        <option selected>Select Category</option>
+                        <option value="American">American</option>
+                        <option value="Chinese">Chinese</option>
+                        <option value="Indian">Indian</option>
+                        <option value="Mexican">Mexican</option>
+                        <option value="Thai">Thai</option>
+                    </select>
+                </div>
+                <div class="col-12">
+                    <label for="image">Product Image</label>
+                    <input type="file" class="form-control" name="image" accept="image/*">
+                </div>
+                <div class="col-12">
+                    <button type="submit" class="btn btn-primary">Submit Recipe</button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>

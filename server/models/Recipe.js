@@ -58,6 +58,11 @@ const recipeSchema = new mongoose.Schema({
         type: String,
         required: "This field is required.",
     },
+    course: {
+        type: String,
+        enum: ["Breakfast", "Lunch", "Dinner", "Dessert", "Misc"],
+        required: "This field is required.",
+    },
 })
 
 recipeSchema.index({ name: "text", category: "text" })

@@ -69,17 +69,11 @@ a {
     background: transparent;
 }
 .container .inputBox span {
-    position: absolute;
-    color: rgb(66, 66, 66);
-    padding: 8px 10px;
     transition: 0.5s;
-    pointer-events: none;
 }
-.container .inputBox input:focus ~ span,
-.container .inputBox input:valid ~ span {
-    transform: translateX(-6px) translateY(-27px);
-    font-size: 12px;
-    color: rgb(96, 96, 96);
+.container .inputBox input:focus ~ label,
+.container .inputBox input:valid ~ label {
+    color: rgb(255, 0, 0);
 }
 .container .ingredientInputBox {
     position: relative;
@@ -90,4 +84,7 @@ a {
     flex-direction: row-reverse;
     gap: 0.5rem;
     padding-right: 1rem;
+}
+.submitForm label {
+    margin-top: -0.25rem;
 }

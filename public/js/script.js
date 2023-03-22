@@ -27,11 +27,11 @@ let directionList = document.querySelector(".directionList")
 let directionDiv = document.querySelectorAll(".directionDiv")
 addDirectionBtn.addEventListener("click", function () {
     let newDirection = directionDiv[0].cloneNode(true)
-    let input = newDirection.getElementsByTagName("textarea")
-    let label = newDirection.getElementsByTagName("label")[0]
-    input.value = ""
-    console.log(label)
-    label.innerText = "Step 2"
+    let textarea = newDirection.getElementsByTagName("textarea")[0]
+    let span = newDirection.getElementsByTagName("span")[0]
+    textarea.value = ""
+    let stepCount = directionList.childNodes.length - 1
+    span.innerText = `Step ${stepCount}`
     directionList.appendChild(newDirection)
 })
 removeDirectionBtn.addEventListener("click", function () {
@@ -41,6 +41,24 @@ removeDirectionBtn.addEventListener("click", function () {
         DirectionToRemove.parentNode.removeChild(DirectionToRemove)
     }
 })
+
+// // Define a function to add or remove a text area
+// function addRemoveTextArea(action) {
+//     let container = document.querySelector("#textarea-container")
+//     if (action === "add") {
+//         let textarea = document.createElement("textarea")
+//         let span = document.createElement("span")
+//         textarea.className = "form-control"
+//         span.className = "input-group-text"
+//         container.appendChild(textarea, span)
+//     } else if (action === "remove") {
+//         let textareas = container.querySelectorAll("textarea")
+//         if (textareas.length > 1) {
+//             textareas[textareas.length - 1].remove()
+//             span[span.length - 1].remove()
+//         }
+//     }
+// }
 
 // Form styling
 // Fetch all the forms we want to apply custom Bootstrap validation styles to

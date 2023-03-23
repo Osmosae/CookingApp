@@ -122,30 +122,17 @@
                     <label for="category">Select Category</label>
                     <select name="category" id="" class="form-select form-control" aria-label="Category">
                         <option selected>Select Category</option>
-                        <option value="American">American</option>
-                        <option value="Chinese">Chinese</option>
-                        <option value="Indian">Indian</option>
-                        <option value="Mexican">Mexican</option>
-                        <option value="Thai">Thai</option>
+                        <% cuisineOptions.forEach(cuisine => { %>
+                            <option value="<%= cuisine.name %>"><%= cuisine.name %></option>
+                       <% }) %>
                     </select>
                 </div>
-                <div class="col-12 cuisineInputBox">
-                    <input class="form-control" list="unitOptions" id="unitList" placeholder="Western, Thai, Indian .....">
-                    <datalist id="unitOptions">
-                        <option value="Grams">
-                        <option value="Kilograms">
-                        <option value="Tonnes">
-                        <option value="Pounds (UK)">
-                        <option value="Pounds (US)">
-                        <option value="Ounces (UK)">
-                        <option value="Ounces (US)">
-                        <option value="Pieces">
-                        <option value="Cubes">
-                        <option value="Bits">
-                        <option value="Splash">
-                        <option value="Dollop">
-                        <option value="Shake">
-                        <option value="Sprinkle">
+                <div class="col-3 cuisineInputBox">
+                    <input class="form-control" list="cuisines" id="cuisineTags" placeholder="American, Thai, Indian .....">
+                    <datalist id="cuisines">
+                        <% cuisineOptions.forEach(cuisine => { %>
+                            <option value="<%= cuisine.name %>">
+                       <% }) %>
                     </datalist>
                 </div>
                 <div class="col-12">
@@ -172,3 +159,4 @@
           
     </div>
 </div>
+

@@ -143,7 +143,9 @@ exports.submitRecipe = async (req, res) => {
     try {
         const infoErrorsObj = req.flash("infoErrors")
         const infoSubmitObj = req.flash("infoSubmit")
-        res.render("submit-recipe", { title: "Submit A New Recipe", infoErrorsObj, infoSubmitObj })
+        const cuisineOptions = await Category.find({})
+        // console.log(cuisineOptions)
+        res.render("submit-recipe", { title: "Submit A New Recipe", infoErrorsObj, infoSubmitObj, cuisineOptions })
     } catch (error) {
         res.status(500).send({ message: error.message || "Error Occured" })
     }

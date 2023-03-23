@@ -78,3 +78,42 @@ Array.from(forms).forEach((form) => {
         false
     )
 })
+
+var input = document.querySelector('input[name="cuisineTags"]'),
+    // init Tagify script on the above inputs
+    tagify = new Tagify(input, {
+        whitelist: ["test", "scrape", "wario"],
+        maxTags: 10,
+        dropdown: {
+            maxItems: 10, // <- mixumum allowed rendered suggestions
+            classname: "tags-look", // <- custom classname for this dropdown, so it could be targeted
+            enabled: 0, // <- show suggestions on focus
+            closeOnSelect: false, // <- do not hide the suggestions dropdown once an item has been selected
+        },
+    })
+
+// var input = document.querySelector(`input[name="cuisineTags"]`),
+//     tagify = new Tagify(input, { whitelist: [] }),
+//     controller // for aborting the call
+
+// // listen to any keystrokes which modify tagify's input
+// tagify.on("input", onInput)
+
+// function onInput(e) {
+//     var value = e.detail.value
+//     tagify.whitelist = null // reset the whitelist
+
+//     // https://developer.mozilla.org/en-US/docs/Web/API/AbortController/abort
+//     controller && controller.abort()
+//     controller = new AbortController()
+
+//     // show loading animation and hide the suggestions dropdown
+//     tagify.loading(true).dropdown.hide()
+
+//     fetch("http://get_suggestions.com?value=" + value, { signal: controller.signal })
+//         .then((RES) => RES.json())
+//         .then(function (newWhitelist) {
+//             tagify.whitelist = newWhitelist // update whitelist Array in-place
+//             tagify.loading(false).dropdown.show(value) // render the suggestions dropdown
+//         })
+// }

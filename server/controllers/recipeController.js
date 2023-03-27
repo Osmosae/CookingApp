@@ -154,17 +154,35 @@ exports.submitRecipe = async (req, res) => {
 // POST /submit-recipe
 exports.submitRecipeOnPost = async (req, res) => {
     try {
+        // const newRecipe = new Recipe({
+        //     name: req.body.recipeName,
+        //     servings: req.body.servings,
+        //     prepTime: req.body.prepTime,
+        //     cookTime: req.body.cookTime,
+        //     direction: req.body.req.body.direction,
+        //     ingredients: req.body.ingredientName,
+        //     category: req.body.category,
+        //     image: "photo-1612240498936-65f5101365d2.avif",
+        //     url: "test-recipe",
+        //     course: req.body.course,
+        // })
+
+        // await newRecipe.save()
+        console.log(req.body)
+
         req.flash("infoSubmit", "Great Success! Your Recipe has been added")
         res.redirect("submit-recipe")
     } catch (error) {
-        req.flash("infoErrors", error)
-        res.redirect("submit-recipe")
+        res.json({ error: error.message })
+        // req.flash("infoErrors", error)
+        // res.redirect("submit-recipe")
     }
 }
 
 //  POST /search
 exports.searchRecipe = async (req, res) => {
     try {
+        console.log(req.body)
         let userSearch = req.body.search
         let recipe = await Recipe.find({ $text: { $search: userSearch, $diacriticSensitive: true } })
         // res.json(recipe)

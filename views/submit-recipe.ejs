@@ -13,42 +13,34 @@
     <% } %> 
     <% if(infoErrorsObj != "") { %>
         <div class="col-10 alert alert-danger" role="alert">
-            <%= infoErrorsObj %>
+            <%= infoErrorsObj[0].message %>
         </div>
     <% } %>         
     <div class="col-10 container">
-        <form action="/submit-recipe" enctype="multipart/form-data" method="post" class="submitForm needs-validation" novalidate="">
+        <form action="/submit-recipe" method="post" class="submitForm needs-validation" novalidate="">
             <div class="row g-3">
                 <div class="card card-body">
-                    <div class="col-12 pt-2">
-                            <div class="mb-1 row g-1">
-                                <div class="col-9 inputBox">
-                                    <label for="recipeName" class="ms-2 position-absolute">
-                                        <span class="h6 small bg-white text-muted px-1">Recipe Name</span>
-                                    </label>
-                                    <input type="text" class="form-control mt-2 border border-top-0" id="recipeName">
-                                </div>
-                                <div class="col-1 inputBox">
-                                    <input type="number" name="servings" id="servings" class="form-control mt-2 border border-top-0" required>
-                                    <label for="servings" class="ms-2 position-absolute">
-                                        <span class="h6 small px-1">Servings</span>
-                                    </label>
-                                </div>
-                                <div class="col-2 inputBox">
-                                    <input type="number" name="servings" id="servings" class="form-control mt-2 border border-top-0" required>
-                                    <label for="servings" class="ms-2 position-absolute">
-                                        <span class="h6 small px-1">Total Time</span>
-                                    </label>
-                                </div>
-                                <div class="col-2 inputBox">
-                                    <input type="number" name="servings" id="servings" class="form-control" required>
-                                    <span>Prep Time</span>
-                                </div>
-                                <div class="col-2 inputBox">
-                                    <input type="number" name="servings" id="servings" class="form-control" required>
-                                    <span>Cook Time</span>
-                                </div>
-                            </div>
+                    <div class="mb-1 row g-1 col-12 pt-1">
+                        <div class="col-9 inputBox">
+                            <label for="recipeName" class="ms-2 position-absolute">
+                                <span class="h6 small bg-white text-muted px-1">Recipe Name</span>
+                            </label>
+                            <input type="text" class="form-control mt-2 border border-top-0" id="recipeName" name="recipeName">
+                        </div>
+                        <div class="col-1 inputBox">
+                            <input type="number" name="servings" id="servings" class="form-control mt-2 border border-top-0" required>
+                            <label for="servings" class="ms-2 position-absolute">
+                                <span class="h6 small px-1">Servings</span>
+                            </label>
+                        </div>
+                        <div class="col-2 inputBox">
+                            <input type="number" name="prepTime" id="prepTime" class="form-control" required>
+                            <span>Prep Time</span>
+                        </div>
+                        <div class="col-2 inputBox">
+                            <input type="number" name="cookTime" id="cookTime" class="form-control" required>
+                            <span>Cook Time</span>
+                        </div>
                     </div>
                 </div>
                 <div class="card card-body">
@@ -56,11 +48,22 @@
                         <label for="ingredients" class="form-label">Ingredients:</label>
                         <div class="ingredientList">
                             <div class="ingredientDiv mb-1 row g-1">
-                                <div class="col-2 ingredientInputBox">
-                                    <input type="number" name="ingredients" class="form-control">
+                                <div class="col-4 ingredientInputBox">
+                                    <input class="form-control" name="ingredientName" list="ingredientOptions" id="ingredientName" placeholder="ingredient..." required>
+                                    <datalist id="ingredientOptions">
+                                        <option value="Chicken">
+                                        <option value="Beef">
+                                        <option value="Lamb">
+                                        <option value="Pork">
+                                        <option value="Vegetable">
+                                        <option value="Feesh">
+                                    </datalist>
+                                </div>
+                                <div class="col-1 ingredientInputBox">
+                                    <input type="number" name="ingredientNumber" class="form-control" placeholder="num...">
                                 </div>
                                 <div class="col-2 ingredientInputBox">
-                                    <input class="form-control" list="unitOptions" id="unitList" placeholder="unit...">
+                                    <input class="form-control" list="unitOptions" name="ingredientUnit" id="unitList" placeholder="unit...">
                                     <datalist id="unitOptions">
                                         <option value="Grams">
                                         <option value="Kilograms">
@@ -79,19 +82,7 @@
                                     </datalist>
                                 </div>
                                 <div class="col-4 ingredientInputBox">
-                                    <!-- <label for="exampleDataList" class="form-label">Datalist example</label> -->
-                                    <input class="form-control" list="ingredientOptions" id="ingredientList" placeholder="ingredient..." required>
-                                    <datalist id="ingredientOptions">
-                                        <option value="Chicken">
-                                        <option value="Beef">
-                                        <option value="Lamb">
-                                        <option value="Pork">
-                                        <option value="Vegetable">
-                                        <option value="Feesh">
-                                    </datalist>
-                                </div>
-                                <div class="col-4 ingredientInputBox">
-                                    <input type="text" name="ingredients" class="form-control" placeholder="Notes">
+                                    <input type="text" name="ingredientNotes" class="form-control" placeholder="Notes">
                                 </div>
                             </div>
                         </div>
@@ -104,12 +95,10 @@
                 <div class="card card-body">
                     <div class="col-12">
                         <label for="directions" class="form-label">Directions:</label>
-                        <div class="col-12">
-                            <div class="directionList">
-                                <div class="directionDiv mb-1 form-floating input-group">
-                                    <span class="input-group-text">Step 1</span>
-                                    <textarea name="directions" id="direction" class="form-control" aria-label="Step 1" required></textarea>
-                                </div>
+                        <div class="col-12 directionList">
+                            <div class="directionDiv mb-1 form-floating input-group">
+                                <span class="input-group-text">Step 1</span>
+                                <textarea name="directions" name="step1" id="direction" class="form-control" aria-label="Step 1" required></textarea>
                             </div>
                         </div>
                     </div>
@@ -119,17 +108,18 @@
                     </div>
                 </div>
                 <div class="col-12">
-                    <label for="category">Select Category</label>
-                    <select name="category" id="" class="form-select form-control" aria-label="Category">
-                        <option selected>Select Category</option>
-                        <% cuisineOptions.forEach(cuisine => { %>
-                            <option value="<%= cuisine.name %>"><%= cuisine.name %></option>
-                       <% }) %>
+                    <label for="category">Select Course</label>
+                    <select name="course" id="course" class="form-select form-control" aria-label="Select Course">
+                        <option selected>Select Course</option>
+                        <option value="Breakfast">Breakfast</option>
+                        <option value="Lunch">Lunch</option>
+                        <option value="Dinner">Dinner</option>
+                        <option value="Dessert">Dessert</option>
                     </select>
                 </div>
                 <div class="col-3 cuisineInputBox">
-                    <input class="form-control" list="cuisines" id="cuisineTags" placeholder="American, Thai, Indian .....">
-                    <datalist id="cuisines">
+                    <input class="form-control" list="cuisine" name="cuisine" placeholder="American, Thai, Indian .....">
+                    <datalist id="cuisine">
                         <% cuisineOptions.forEach(cuisine => { %>
                             <option value="<%= cuisine.name %>">
                        <% }) %>
@@ -140,7 +130,7 @@
                 </div>
             </div>
         </form>
-        <form class="card card-body">
+        <!-- <form class="card card-body">
             <div class="row">
                 <div class="col px-1 mb-2">
                     <label for="input1" class="ms-2 position-absolute">
@@ -155,7 +145,7 @@
                     <input type="password" class="form-control mt-2" id="input2">
                 </div>
             </div>
-          </form>
+          </form> -->
           
     </div>
 </div>

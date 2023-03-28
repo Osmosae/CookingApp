@@ -6,7 +6,6 @@ let ingredientDiv = document.querySelectorAll(".ingredientDiv")
 addIngredientBtn.addEventListener("click", function () {
     let newIngredient = ingredientDiv[0].cloneNode(true)
     let input = newIngredient.getElementsByTagName("input")
-    console.log(newIngredient.getElementsByTagName("input"))
     for (let i = 0; i < 4; i++) {
         const element = input[i]
         element.value = ""

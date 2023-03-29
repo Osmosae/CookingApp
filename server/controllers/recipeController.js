@@ -1,6 +1,7 @@
 require("../models/database")
 const Category = require("../models/Category")
 const Recipe = require("../models/Recipe")
+const cloudinary = require("../middleware/cloudinary")
 
 // GET Homepage
 exports.homepage = async (req, res) => {
@@ -168,7 +169,11 @@ exports.submitRecipeOnPost = async (req, res) => {
         // })
 
         // await newRecipe.save()
+
+        // Upload image to cloudinary
+        const result = await cloudinary.uploader.upload(req.file.path)
         console.log(req.body)
+        console.log(result)
 
         req.flash("infoSubmit", "Great Success! Your Recipe has been added")
         res.redirect("submit-recipe")

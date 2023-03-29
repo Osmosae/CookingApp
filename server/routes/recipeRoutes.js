@@ -1,5 +1,6 @@
 const express = require("express")
 const router = express.Router()
+const upload = require("../middleware/multer")
 const recipeController = require("../controllers/recipeController")
 
 // App Routes
@@ -16,7 +17,7 @@ router.get("/lunches", recipeController.exploreLunch)
 router.get("/dinners", recipeController.exploreDinner)
 router.get("/desserts", recipeController.exploreDessert)
 router.get("/submit-recipe", recipeController.submitRecipe)
-router.post("/submit-recipe", recipeController.submitRecipeOnPost)
+router.post("/submit-recipe", upload.single("file"), recipeController.submitRecipeOnPost)
 router.post("/search", recipeController.searchRecipe)
 
 module.exports = router

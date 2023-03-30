@@ -2,6 +2,7 @@ const express = require("express")
 const router = express.Router()
 const upload = require("../middleware/multer")
 const recipeController = require("../controllers/recipeController")
+const { ensureAuth } = require("../middleware/ensureAuth")
 
 // App Routes
 router.get("/", recipeController.homepage)
@@ -16,8 +17,8 @@ router.get("/breakfast", recipeController.exploreBreakfast)
 router.get("/lunches", recipeController.exploreLunch)
 router.get("/dinners", recipeController.exploreDinner)
 router.get("/desserts", recipeController.exploreDessert)
-router.get("/submit-recipe", recipeController.submitRecipe)
-router.post("/submit-recipe", upload.single("file"), recipeController.submitRecipeOnPost)
+router.get("/submit-recipe", ensureAuth, recipeController.submitRecipe)
+router.post("/submit-recipe", ensureAuth, upload.single("file"), recipeController.submitRecipeOnPost)
 router.post("/search", recipeController.searchRecipe)
 
 module.exports = router

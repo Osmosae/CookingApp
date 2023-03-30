@@ -11,3 +11,4 @@ db.once("open", function () {
 //  Models
 require("./Category")
 require("./Recipe")
+require("./User")

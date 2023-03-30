@@ -59,6 +59,6 @@ a {
     gap: 0.5rem;
     padding-right: 1rem;
 }
-.row {
+.submitForm .row {
     --bs-gutter-x: 0;
 }

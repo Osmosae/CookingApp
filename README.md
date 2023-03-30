@@ -20,3 +20,9 @@ Needs a .env file in config folder with:
 "CLOUD_NAME", 
 "API_KEY", 
 "API_SECRET" all from cloudinary
+
+
+Create a google project in the cloud console, and get your client_id and client secret, and set your callback_url, then pop those into the config as well
+GOOGLE_CLIENT_ID,
+GOOGLE_CLIENT_SECRET,
+GOOGLE_CALLBACK_URL 

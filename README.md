@@ -8,7 +8,7 @@ Still very much a work in progress, if you've somehow found your way here;
 npm install
 
 
-Uses MongoDB for database & cloudinary for media uploads
+Uses MongoDB for database & cloudinary for media uploads, and google for User Auth
 
 
 Needs a .env file in config folder with: 

@@ -59,10 +59,43 @@ exports.exploreRecipe = async (req, res) => {
 }
 // GET /explore-latest
 exports.exploreLatest = async (req, res) => {
+    let perPage = 12
+    let page = req.query.page || 1
     try {
-        const limitNumber = 12
-        const recipe = await Recipe.find({}).sort({ _id: -1 }).limit(limitNumber)
-        res.render("explore-latest", { title: "Explore the Latest Recipe's", recipe })
+        const recipe = await Recipe.aggregate([{ $sort: { _id: -1 } }])
+            .skip(perPage * page - perPage)
+            .limit(perPage)
+            .exec()
+
+        const count = await Recipe.count()
+
+        res.render("explore-latest", {
+            title: "Explore the Latest Recipe's",
+            recipe,
+            currentPage: page,
+            pages: Math.ceil(count / perPage),
+        })
+
+        //  If using mongoose < v7
+        // Recipe.aggregate([{ $sort: { _id: -1 } }])
+        //     .skip(perPage * page - perPage)
+        //     .limit(perPage)
+        //     .exec(function (err, recipe) {
+        //         Recipe.count().exec(function (err, count) {
+        //             if (err) return next(err)
+        //             res.render("explore-latest", {
+        //                 title: "Explore the Latest Recipe's",
+        //                 recipe,
+        //                 currentPage: page,
+        //                 pages: Math.ceil(count / perPage),
+        //             })
+        //         })
+        //     })
+
+        // no pagination
+        // const limitNumber = 12
+        // const recipe = await Recipe.find({}).sort({ _id: -1 }).limit(limitNumber)
+        // res.render("explore-latest", { title: "Explore the Latest Recipe's", recipe })
     } catch (error) {
         res.status(500).send({ message: error.message || "Error Occured" })
     }

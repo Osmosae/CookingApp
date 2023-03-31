@@ -42,16 +42,15 @@
                     </li>
                 <% } %>
 
-                <% let i = currentPage %>
-                <% if (i > 3) { %>
+                <% if (currentPage > 3) { %>
                     <li class="page-item"><a class="page-link" href="#">...</a></li>
                 <% } %>
 
-                <% for (let j = Math.max(1, Number(currentPage) - 2); j <= Math.min(Number(currentPage) + 2, pages); j++) { %>
-                    <% if (j == currentPage) { %>
-                        <li class="page-item active"><a class="page-link" href="#"><%= j %></a></li>
+                <% for (let i = Math.max(1, Number(currentPage) - 2); i <= Math.min(Number(currentPage) + 2, pages); i++) { %>
+                    <% if (i == currentPage) { %>
+                        <li class="page-item active"><a class="page-link" href="#"><%= i %></a></li>
                     <% } else { %>
-                        <li class="page-item"><a class="page-link" href="/<%= pageName %>?page=<%= j %>"><%= j %></a></li>
+                        <li class="page-item"><a class="page-link" href="/<%= pageName %>?page=<%= i %>"><%= i %></a></li>
                     <% } %>
                 <% } %>
 

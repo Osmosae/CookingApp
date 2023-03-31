@@ -59,7 +59,7 @@ exports.exploreRecipe = async (req, res) => {
 }
 // GET /explore-latest
 exports.exploreLatest = async (req, res) => {
-    let perPage = 2
+    let perPage = 12
     let page = req.query.page || 1
     let pageName = "explore-latest"
     try {

@@ -5,7 +5,7 @@
         <nav style="--bs-breadcrumb-divider: url(&#34;data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='8' height='8'%3E%3Cpath d='M2.5 0L1 1.5 3.5 4 1 6.5 2.5 8l4-4-4-4z' fill='%236c757d'/%3E%3C/svg%3E&#34;);" aria-label="breadcrumb">
             <ol class="breadcrumb">
                 <li class="breadcrumb-item"><a href="/">Home</a></li>
-                <li class="breadcrumb-item" aria-current="/explore-latest">Explore Latest</li>
+                <li class="breadcrumb-item" aria-current="/<%= pageName %>">Explore Latest</li>
             </ol>
           </nav>
     </div>
@@ -36,7 +36,7 @@
                     </li>
                 <% } else { %>
                     <li class="page-item">
-                        <a class="page-link" aria-label="First Page" href="/explore-latest?page=1">
+                        <a class="page-link" aria-label="First Page" href="/<%= pageName %>?page=1">
                             <span aria-hidden="true">&laquo;</span>
                         </a>                    
                     </li>
@@ -51,7 +51,7 @@
                     <% if (i == currentPage) { %>
                         <li class="page-item active"><a class="page-link" href="#"><%= i %></a></li>
                     <% } else { %>
-                        <li class="page-item"><a class="page-link" href="/explore-latest?page=<%= i %>"><%= i %></a></li>
+                        <li class="page-item"><a class="page-link" href="/<%= pageName %>?page=<%= i %>"><%= i %></a></li>
                     <% } %>
 
                     <% if (i == Number(currentPage) +4 && i < pages) { %>
@@ -67,7 +67,7 @@
                     </li>
                 <% } else { %>
                     <li class="page-item">
-                        <a class="page-link" aria-label="Last Page" href="/explore-latest?page=<%= pages %>">
+                        <a class="page-link" aria-label="Last Page" href="/<%= pageName %>?page=<%= pages %>">
                             <span aria-hidden="true">&raquo;</span>
                         </a>                    
                     </li>

@@ -61,6 +61,7 @@ exports.exploreRecipe = async (req, res) => {
 exports.exploreLatest = async (req, res) => {
     let perPage = 12
     let page = req.query.page || 1
+    let pageName = "explore-latest"
     try {
         const recipe = await Recipe.aggregate([{ $sort: { _id: -1 } }])
             .skip(perPage * page - perPage)
@@ -74,28 +75,8 @@ exports.exploreLatest = async (req, res) => {
             recipe,
             currentPage: page,
             pages: Math.ceil(count / perPage),
+            pageName,
         })
-
-        //  If using mongoose < v7
-        // Recipe.aggregate([{ $sort: { _id: -1 } }])
-        //     .skip(perPage * page - perPage)
-        //     .limit(perPage)
-        //     .exec(function (err, recipe) {
-        //         Recipe.count().exec(function (err, count) {
-        //             if (err) return next(err)
-        //             res.render("explore-latest", {
-        //                 title: "Explore the Latest Recipe's",
-        //                 recipe,
-        //                 currentPage: page,
-        //                 pages: Math.ceil(count / perPage),
-        //             })
-        //         })
-        //     })
-
-        // no pagination
-        // const limitNumber = 12
-        // const recipe = await Recipe.find({}).sort({ _id: -1 }).limit(limitNumber)
-        // res.render("explore-latest", { title: "Explore the Latest Recipe's", recipe })
     } catch (error) {
         res.status(500).send({ message: error.message || "Error Occured" })
     }
@@ -137,12 +118,26 @@ exports.exploreBreakfast = async (req, res) => {
 }
 // GET /lunches
 exports.exploreLunch = async (req, res) => {
+    let perPage = 12
+    let page = req.query.page || 1
+    let pageName = "lunches"
     try {
-        const itemNumber = 12
-        const lunchRecipe = await Recipe.find({ course: "Lunch" }).limit(itemNumber)
-        const food = { lunchRecipe }
-        // res.json(food)
-        res.render("lunches", { title: "Explore Lunch Recipe's", food })
+        const food = await Recipe.aggregate([{ $sort: { _id: -1 } }, { $match: { course: "Lunch" } }])
+            .skip(perPage * page - perPage)
+            .limit(perPage)
+            .exec()
+
+        const count = await Recipe.count({
+            course: "Lunch",
+        })
+
+        res.render("lunches", {
+            title: "Explore Lunch Recipe's",
+            food,
+            currentPage: page,
+            pages: Math.ceil(count / perPage),
+            pageName,
+        })
     } catch (error) {
         res.status(500).send({ message: error.message || "Error Occured" })
     }

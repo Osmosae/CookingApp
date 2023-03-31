@@ -36,27 +36,27 @@
                     </li>
                 <% } else { %>
                     <li class="page-item">
-                        <a class="page-link" aria-label="First Page" href="<%= pageName %>?page=1">
+                        <a class="page-link" aria-label="First Page" href="/<%= pageName %>?page=1">
                             <span aria-hidden="true">&laquo;</span>
                         </a>                    
                     </li>
                 <% } %>
 
-                <% let i = (Number(currentPage) > 5 ? Number(currentPage) -4 : 1) %>
-                <% if (i !== 1) { %>
+                <% let i = currentPage %>
+                <% if (i > 3) { %>
                     <li class="page-item"><a class="page-link" href="#">...</a></li>
                 <% } %>
 
-                <% for (; i <= (Number(currentPage) + 4) && i <= pages; i++) { %>
-                    <% if (i == currentPage) { %>
-                        <li class="page-item active"><a class="page-link" href="#"><%= i %></a></li>
+                <% for (let j = Math.max(1, Number(currentPage) - 2); j <= Math.min(Number(currentPage) + 2, pages); j++) { %>
+                    <% if (j == currentPage) { %>
+                        <li class="page-item active"><a class="page-link" href="#"><%= j %></a></li>
                     <% } else { %>
-                        <li class="page-item"><a class="page-link" href="<%= pageName %>?page=<%= i %>"><%= i %></a></li>
+                        <li class="page-item"><a class="page-link" href="/<%= pageName %>?page=<%= j %>"><%= j %></a></li>
                     <% } %>
+                <% } %>
 
-                    <% if (i == Number(currentPage) +4 && i < pages) { %>
-                        <li class="page-item"><a class="page-link" href="#">...</a></li>
-                    <% } %>
+                <% if (Number(pages) - Number(currentPage) > 2) { %>
+                    <li class="page-item"><a class="page-link" href="#">...</a></li>
                 <% } %>
 
                 <% if (currentPage == pages) { %>
@@ -67,7 +67,7 @@
                     </li>
                 <% } else { %>
                     <li class="page-item">
-                        <a class="page-link" aria-label="Last Page" href="<%= pageName %>?page=<%= pages %>">
+                        <a class="page-link" aria-label="Last Page" href="/<%= pageName %>?page=<%= pages %>">
                             <span aria-hidden="true">&raquo;</span>
                         </a>                    
                     </li>

@@ -27,10 +27,24 @@ exports.homepage = async (req, res) => {
 // GET /categories
 exports.exploreCategories = async (req, res) => {
     try {
-        const limitNumber = 20
-        const categories = await Category.find({}).limit(limitNumber)
+        const perPage = 20
+        let page = req.query.page || 1
+        const categories = await Category.aggregate([{ $sort: { name: 1 } }])
+            .skip(perPage * page - perPage)
+            .limit(perPage)
+            .exec()
+
+        const count = await Category.count()
+        const pageName = "categories"
         const food = ""
-        res.render("categories", { title: "Categories", categories, food })
+        res.render("categories", {
+            title: "Categories",
+            categories,
+            food,
+            currentPage: page,
+            pages: Math.ceil(count / perPage),
+            pageName,
+        })
     } catch (error) {
         res.status(500).send({ message: error.message || "Error Occured" })
     }
@@ -38,13 +52,35 @@ exports.exploreCategories = async (req, res) => {
 // GET /categories/:url
 exports.exploreCategoriesByUrl = async (req, res) => {
     try {
+        // let categoryUrl = req.params.url
+        // const limitNumber = 12
+        // const categoryByUrl = await Recipe.find({ category: categoryUrl }).limit(limitNumber)
+        // const food = { categoryByUrl }
+        // console.log(categoryByUrl)
+        // console.log(food)
+        // res.render("categories", { title: "Categories", food, categoryUrl })
+        const perPage = 12
+        let page = req.query.page || 1
         let categoryUrl = req.params.url
-        const limitNumber = 12
-        const categoryByUrl = await Recipe.find({ category: categoryUrl }).limit(limitNumber)
+        const categoryByUrl = await Recipe.aggregate([{ $sort: { name: 1 } }, { $match: { category: categoryUrl } }])
+            .skip(perPage * page - perPage)
+            .limit(perPage)
+            .exec()
+
         const food = { categoryByUrl }
-        res.render("categories", { title: "Categories", food, categoryUrl })
+        console.log(food.length)
+        const count = await Category.count()
+        const pageName = "categories"
+        res.render("categories", {
+            title: "Categories",
+            food,
+            categoryUrl,
+            currentPage: page,
+            pages: Math.ceil(count / perPage),
+            pageName,
+        })
     } catch (error) {
-        res.satus(500).send({ message: error.message || "Error Occured" })
+        res.status(500).send({ message: error.message || "Error Occured" })
     }
 }
 // GET /recipe/:id

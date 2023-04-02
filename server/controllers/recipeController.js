@@ -188,7 +188,7 @@ exports.exploreLunch = async (req, res) => {
 exports.exploreDinner = async (req, res) => {
     let perPage = 12
     let page = req.query.page || 1
-    let pageName = "dinner"
+    let pageName = "dinners"
     try {
         const food = await Recipe.aggregate([{ $sort: { _id: -1 } }, { $match: { course: "Dinner" } }])
             .skip(perPage * page - perPage)
@@ -214,16 +214,14 @@ exports.exploreDinner = async (req, res) => {
 exports.exploreDessert = async (req, res) => {
     let perPage = 12
     let page = req.query.page || 1
-    let pageName = "dessert"
+    let pageName = "desserts"
     try {
         const food = await Recipe.aggregate([{ $sort: { _id: -1 } }, { $match: { course: "Dessert" } }])
             .skip(perPage * page - perPage)
             .limit(perPage)
             .exec()
 
-        const count = await Recipe.count({
-            course: "Dessert",
-        })
+        const count = await Recipe.count()
 
         res.render("desserts", {
             title: "Explore Dessert Recipe's",
@@ -285,11 +283,22 @@ exports.submitRecipeOnPost = async (req, res) => {
 //  POST /search
 exports.searchRecipe = async (req, res) => {
     try {
-        console.log(req.body)
         let userSearch = req.body.search
-        let recipe = await Recipe.find({ $text: { $search: userSearch, $diacriticSensitive: true } })
-        // res.json(recipe)
-        res.render("search", { title: "Search", recipe, userSearch })
+        let food = await Recipe.find({
+            $or: [
+                { name: { $regex: new RegExp(userSearch), $options: "i" } },
+                { description: { $regex: new RegExp(userSearch), $options: "i" } },
+                { ingredients: { $regex: new RegExp(userSearch), $options: "i" } },
+                { category: { $regex: new RegExp(userSearch), $options: "i" } },
+                { course: { $regex: new RegExp(userSearch), $options: "i" } },
+            ],
+        })
+
+        res.render("search", {
+            title: "Search Results",
+            food,
+            userSearch,
+        })
     } catch (error) {
         res.status(500).send({ message: error.message || "Error Occurred" })
     }

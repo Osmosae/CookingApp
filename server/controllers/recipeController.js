@@ -221,7 +221,9 @@ exports.exploreDessert = async (req, res) => {
             .limit(perPage)
             .exec()
 
-        const count = await Recipe.count()
+        const count = await Recipe.count({
+            course: "Dessert",
+        })
 
         res.render("desserts", {
             title: "Explore Dessert Recipe's",

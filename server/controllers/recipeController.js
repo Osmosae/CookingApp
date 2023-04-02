@@ -284,6 +284,7 @@ exports.submitRecipeOnPost = async (req, res) => {
 exports.searchRecipe = async (req, res) => {
     try {
         let userSearch = req.body.search
+        //  $or searches through different fields, $regex allows for partial matches, and $options: i allow case-insensitive results
         let food = await Recipe.find({
             $or: [
                 { name: { $regex: new RegExp(userSearch), $options: "i" } },

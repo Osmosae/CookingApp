@@ -134,12 +134,6 @@ exports.randomRecipe = async (req, res) => {
 }
 // GET /breakfast
 exports.exploreBreakfast = async (req, res) => {
-    // try {
-    // const itemNumber = 12
-    // const breakfastRecipe = await Recipe.find({ course: "Breakfast" }).limit(itemNumber)
-    // const food = { breakfastRecipe }
-    // // res.json(food)
-    // res.render("breakfast", { title: "Explore Breakfast Recipe's", food })
     let perPage = 12
     let page = req.query.page || 1
     let pageName = "breakfast"
@@ -192,12 +186,6 @@ exports.exploreLunch = async (req, res) => {
 }
 // GET /dinners
 exports.exploreDinner = async (req, res) => {
-    // try {
-    //     const itemNumber = 12
-    //     const dinnerRecipe = await Recipe.find({ course: "Dinner" }).limit(itemNumber)
-    //     const food = { dinnerRecipe }
-    //     // res.json(food)
-    //     res.render("dinners", { title: "Explore Dinner Recipe's", food })
     let perPage = 12
     let page = req.query.page || 1
     let pageName = "dinner"
@@ -224,12 +212,6 @@ exports.exploreDinner = async (req, res) => {
 }
 // GET /desserts
 exports.exploreDessert = async (req, res) => {
-    // try {
-    //     const itemNumber = 12
-    //     const dessertRecipe = await Recipe.find({ course: "Dessert" }).limit(itemNumber)
-    //     const food = { dessertRecipe }
-    //     // res.json(food)
-    //     res.render("desserts", { title: "Explore Dessert Recipe's", food })
     let perPage = 12
     let page = req.query.page || 1
     let pageName = "dessert"

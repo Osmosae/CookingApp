@@ -12,7 +12,7 @@
 
     <% if (food!="") { %>
         <div class="row row-cols-2 row-cols-lg-4 g-2 g-lg-3 pt-4">
-            <% food.breakfastRecipe.forEach(function(recipe, index){ %>
+            <% food.forEach(function(recipe, index){ %>
                 <a href="/recipe/<%= recipe.url %>" class="col text-center category__link">
                     <div class="category__img category__img--Large shadow">
                         <img src="img/recipes/<%= recipe.image %>" alt="<%= recipe.name %>" loading="lazy" />
@@ -23,5 +23,9 @@
         </div>
     <% } else { %>
         <h3 class="py-4"> Sorry there was an internal error somewhere, please contact the admin - <a href="/">Back</a></h2>
+    <% } %>
+
+    <% if(food.length > 0) { %>
+        <%- include("../views/partials/pagination.ejs") %>
     <% } %>
 </section>

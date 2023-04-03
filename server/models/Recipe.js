@@ -27,33 +27,37 @@ const mongoose = require("mongoose")
 const recipeSchema = new mongoose.Schema({
     name: {
         type: String,
-        required: "This field is required.",
+        required: true,
     },
     description: {
         type: String,
-        required: "This field is required.",
+        required: true,
     },
     ingredients: {
         type: Array,
-        required: "This field is required.",
+        required: true,
     },
     category: {
         type: String,
         enum: ["Thai", "American", "Chinese", "Mexican", "Indian"],
-        required: "This field is required.",
+        required: true,
     },
     image: {
         type: String,
-        required: "This field is required.",
+        required: true,
     },
     url: {
         type: String,
-        required: "This field is required.",
+        required: true,
     },
     course: {
         type: String,
         enum: ["Breakfast", "Lunch", "Dinner", "Dessert", "Misc"],
-        required: "This field is required.",
+        required: true,
+    },
+    video: {
+        type: String,
+        required: false,
     },
 })
 

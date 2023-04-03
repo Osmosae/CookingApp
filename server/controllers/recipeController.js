@@ -264,6 +264,7 @@ exports.submitRecipeOnPost = async (req, res) => {
         //     image: "photo-1612240498936-65f5101365d2.avif",
         //     url: "test-recipe",
         //     course: req.body.course,
+        //     video: req.body.videoLink,
         // })
 
         // await newRecipe.save()

@@ -15,10 +15,12 @@ a {
 .category__link {
     display: block;
     text-decoration: none;
-    transition: 250ms all;
+    transition: 200ms all;
 }
-.category__link:hover {
-    transform: scale(1.1);
+@media (hover: hover) {
+    .category__link:hover {
+        transform: scale(1.1);
+    }
 }
 .category__img {
     display: flex;

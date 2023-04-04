@@ -1,28 +1,4 @@
 const mongoose = require("mongoose")
-// cloudinary
-// const recipeSchema = new mongoose.Schema({
-//     name: {
-//         type: String,
-//         required: "This field is required",
-//     },
-//     image: {
-//         type: String,
-//         required: "This field is required",
-//     },
-//     ingredients: {
-//         type: Array,
-//         require: "This field is required",
-//     },
-//     directions: {
-//         type: String,
-//         require: "This field is required",
-//     },
-//     category: {
-//         type: String,
-//         enum: ["American", "Chinese", "Indian", "Mexican", "Spanish", "Thai"],
-//         require: "This field is required",
-//     },
-// })
 
 const recipeSchema = new mongoose.Schema({
     name: {
@@ -56,6 +32,10 @@ const recipeSchema = new mongoose.Schema({
         required: true,
     },
     video: {
+        type: String,
+        required: false,
+    },
+    chef: {
         type: String,
         required: false,
     },

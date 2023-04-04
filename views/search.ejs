@@ -1,5 +1,7 @@
-<h1>Search Results for: "<%=userSearch%>"</h1>
-
+<h1>Search</h1>
+<% if (count != 0) {%>
+    <h3>There are <%=count%> results for: "<%=userSearch%>"</h3>
+<% } %>
 <section class="pb-4 pt-4">
     
         <% if (food!="") { %>

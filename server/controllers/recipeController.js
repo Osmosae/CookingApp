@@ -237,6 +237,50 @@ exports.exploreDessert = async (req, res) => {
     }
 }
 
+//  GET /search
+exports.searchRecipe = async (req, res) => {
+    let perPage = 12
+    let page = req.query.page || 1
+    let pageName = "search"
+    try {
+        let userSearch = req.query.search
+        //  $or searches through different fields, $regex allows for partial matches, and $options: i allow case-insensitive results
+        const food = await Recipe.find({
+            $or: [
+                { name: { $regex: new RegExp(userSearch), $options: "i" } },
+                { description: { $regex: new RegExp(userSearch), $options: "i" } },
+                { ingredients: { $regex: new RegExp(userSearch), $options: "i" } },
+                { category: { $regex: new RegExp(userSearch), $options: "i" } },
+                { course: { $regex: new RegExp(userSearch), $options: "i" } },
+            ],
+        })
+            .skip(perPage * page - perPage)
+            .limit(perPage)
+            .exec()
+
+        const count = await Recipe.find({
+            $or: [
+                { name: { $regex: new RegExp(userSearch), $options: "i" } },
+                { description: { $regex: new RegExp(userSearch), $options: "i" } },
+                { ingredients: { $regex: new RegExp(userSearch), $options: "i" } },
+                { category: { $regex: new RegExp(userSearch), $options: "i" } },
+                { course: { $regex: new RegExp(userSearch), $options: "i" } },
+            ],
+        }).count()
+
+        res.render("search", {
+            title: "Search Results",
+            food,
+            userSearch,
+            currentPage: page,
+            pages: Math.ceil(count / perPage),
+            pageName,
+        })
+    } catch (error) {
+        res.status(500).send({ message: error.message || "Error Occurred" })
+    }
+}
+
 // GET /submit-recipe
 exports.submitRecipe = async (req, res) => {
     try {
@@ -280,30 +324,5 @@ exports.submitRecipeOnPost = async (req, res) => {
         res.json({ error: error.message })
         // req.flash("infoErrors", error)
         // res.redirect("submit-recipe")
-    }
-}
-
-//  POST /search
-exports.searchRecipe = async (req, res) => {
-    try {
-        let userSearch = req.body.search
-        //  $or searches through different fields, $regex allows for partial matches, and $options: i allow case-insensitive results
-        let food = await Recipe.find({
-            $or: [
-                { name: { $regex: new RegExp(userSearch), $options: "i" } },
-                { description: { $regex: new RegExp(userSearch), $options: "i" } },
-                { ingredients: { $regex: new RegExp(userSearch), $options: "i" } },
-                { category: { $regex: new RegExp(userSearch), $options: "i" } },
-                { course: { $regex: new RegExp(userSearch), $options: "i" } },
-            ],
-        })
-
-        res.render("search", {
-            title: "Search Results",
-            food,
-            userSearch,
-        })
-    } catch (error) {
-        res.status(500).send({ message: error.message || "Error Occurred" })
     }
 }

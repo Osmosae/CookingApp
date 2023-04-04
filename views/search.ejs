@@ -1,4 +1,4 @@
-<h1>Search</h1>
+<h1>Search Results for: "<%=userSearch%>"</h1>
 
 <section class="pb-4 pt-4">
     
@@ -17,5 +17,8 @@
             <h3 class="py-4"> Sorry no results found for "<%= userSearch%>" - <a href="/">Back</a></h2>
         <% } %>
 
+        <% if(food.length > 0) { %>
+            <%- include("../views/partials/paginationSearch.ejs") %>
+        <% } %>
     
 </section>

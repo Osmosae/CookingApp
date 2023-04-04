@@ -17,8 +17,8 @@ router.get("/breakfast", recipeController.exploreBreakfast)
 router.get("/lunches", recipeController.exploreLunch)
 router.get("/dinners", recipeController.exploreDinner)
 router.get("/desserts", recipeController.exploreDessert)
+router.get("/search", recipeController.searchRecipe)
 router.get("/submit-recipe", ensureAuth, recipeController.submitRecipe)
 router.post("/submit-recipe", ensureAuth, upload.single("file"), recipeController.submitRecipeOnPost)
-router.get("/search", recipeController.searchRecipe)
 
 module.exports = router

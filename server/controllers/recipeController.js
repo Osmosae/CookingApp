@@ -275,6 +275,7 @@ exports.searchRecipe = async (req, res) => {
             currentPage: page,
             pages: Math.ceil(count / perPage),
             pageName,
+            count,
         })
     } catch (error) {
         res.status(500).send({ message: error.message || "Error Occurred" })

@@ -19,6 +19,9 @@ exports.homepage = async (req, res) => {
         const lunch = { lunchRecipe }
         const dinner = { dinnerRecipe }
         const dessert = { dessertRecipe }
+
+        console.log(req.user)
+
         res.render("home", { title: "Homepage", categories, food, breakfast, lunch, dinner, dessert })
     } catch (error) {
         res.status(500).send({ message: error.message || "Error Occured" })
@@ -252,6 +255,7 @@ exports.searchRecipe = async (req, res) => {
                 { ingredients: { $regex: new RegExp(userSearch), $options: "i" } },
                 { category: { $regex: new RegExp(userSearch), $options: "i" } },
                 { course: { $regex: new RegExp(userSearch), $options: "i" } },
+                { chef: { $regex: new RegExp(userSearch), $options: "i" } },
             ],
         })
             .skip(perPage * page - perPage)
@@ -265,6 +269,7 @@ exports.searchRecipe = async (req, res) => {
                 { ingredients: { $regex: new RegExp(userSearch), $options: "i" } },
                 { category: { $regex: new RegExp(userSearch), $options: "i" } },
                 { course: { $regex: new RegExp(userSearch), $options: "i" } },
+                { chef: { $regex: new RegExp(userSearch), $options: "i" } },
             ],
         }).count()
 
@@ -310,6 +315,7 @@ exports.submitRecipeOnPost = async (req, res) => {
         //     url: "test-recipe",
         //     course: req.body.course,
         //     video: req.body.videoLink,
+        //     chef: req.body.chef,
         // })
 
         // await newRecipe.save()

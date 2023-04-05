@@ -8,7 +8,7 @@
             </li>
         <% } else { %>
             <li class="page-item">
-                <a class="page-link" aria-label="First Page" href="/<%= pageName %>?search=<%=userSearch%>&page=1">
+                <a class="page-link" aria-label="First Page" href="/<%= pageName %>?term=<%=userSearch%>&page=1">
                     <span aria-hidden="true">&laquo;</span>
                 </a>                    
             </li>
@@ -22,7 +22,7 @@
             <% if (i == currentPage) { %>
                 <li class="page-item active"><a class="page-link" href="#"><%= i %></a></li>
             <% } else { %>
-                <li class="page-item"><a class="page-link" href="/<%= pageName %>?search=<%=userSearch%>&page=<%= i %>"><%= i %></a></li>
+                <li class="page-item"><a class="page-link" href="/<%= pageName %>?term=<%=userSearch%>&page=<%= i %>"><%= i %></a></li>
             <% } %>
         <% } %>
 
@@ -38,7 +38,7 @@
             </li>
         <% } else { %>
             <li class="page-item">
-                <a class="page-link" aria-label="Last Page" href="/<%= pageName %>?search=<%=userSearch%>&page=<%= pages %>">
+                <a class="page-link" aria-label="Last Page" href="/<%= pageName %>?term=<%=userSearch%>&page=<%= pages %>">
                     <span aria-hidden="true">&raquo;</span>
                 </a>                    
             </li>

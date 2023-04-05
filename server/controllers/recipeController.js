@@ -246,7 +246,7 @@ exports.searchRecipe = async (req, res) => {
     let page = req.query.page || 1
     let pageName = "search"
     try {
-        let userSearch = req.query.search
+        let userSearch = req.query.term
         //  $or searches through different fields, $regex allows for partial matches, and $options: i allow case-insensitive results
         const food = await Recipe.find({
             $or: [

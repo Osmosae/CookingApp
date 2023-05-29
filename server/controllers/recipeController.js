@@ -20,8 +20,6 @@ exports.homepage = async (req, res) => {
         const dinner = { dinnerRecipe }
         const dessert = { dessertRecipe }
 
-        console.log(req.user)
-
         res.render("home", { title: "Homepage", categories, food, breakfast, lunch, dinner, dessert })
     } catch (error) {
         res.status(500).send({ message: error.message || "Error Occured" })
